@@ -1,7 +1,7 @@
 /*
  * CS:APP Data Lab
  *
- * <Please put your name and userid here>
+ * <shaozk>
  *
  * bits.c - Source file with your solutions to the Lab.
  *          This is the file you will hand in to your instructor.
@@ -142,7 +142,7 @@ extern int printf(const char *, ...);
  *   Rating: 2
  */
 long implication(long x, long y) {
-    return 2L;
+    return (!x) | y;
 }
 /*
  * leastBitPos - return a mask that marks the position of the
@@ -153,7 +153,7 @@ long implication(long x, long y) {
  *   Rating: 2
  */
 long leastBitPos(long x) {
-    return 2;
+    return (~x + 1) & x;
 }
 /*
  * distinctNegation - returns 1 if x != -x.
@@ -163,7 +163,7 @@ long leastBitPos(long x) {
  *   Rating: 2
  */
 long distinctNegation(long x) {
-    return 2;
+    return !!((~x + 1) ^ x);
 }
 /*
  * fitsBits - return 1 if x can be represented as an
@@ -175,7 +175,7 @@ long distinctNegation(long x) {
  *   Rating: 2
  */
 long fitsBits(long x, long n) {
-    return 2L;
+    return !((x >> (n - 1)) ^ (x >> 63));
 }
 // 3
 /*
@@ -190,7 +190,8 @@ long fitsBits(long x, long n) {
  *  Rating: 4
  */
 long trueFiveEighths(long x) {
-    return 2L;
+    long o = ((x >> 63) & 0x01);
+    return ((x + (o << 1) - o) >> 1) + ((x + (o << 3) - o) >> 3) + o;
 }
 /*
  * addOK - Determine if can compute x+y without overflow
@@ -212,7 +213,7 @@ long addOK(long x, long y) {
  *   Rating: 3
  */
 long isPower2(long x) {
-    return 2L;
+    return (!((x >> 63) & 0x01)) & (x & 0x01) & (x ^ 0x00) & !((x >> 1) & 0x01);
 }
 /*
  * rotateLeft - Rotate x to the left by n
@@ -224,7 +225,7 @@ long isPower2(long x) {
  *   Rating: 3
  */
 long rotateLeft(long x, long n) {
-    return 2;
+    return ((x << n) | (x >> (63 - n)));
 }
 // 4
 /*
